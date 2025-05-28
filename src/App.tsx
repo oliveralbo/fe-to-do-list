@@ -4,12 +4,12 @@ import { Layout } from "./components/Layout";
 
 function App() {
   return (
-    <div>
+    <>
       <Header />
       <Layout>
         <Home />
       </Layout>
-    </div>
+    </>
   );
 }
 

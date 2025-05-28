@@ -6,7 +6,7 @@ export const Header = () => {
     <div className="sticky top-0 left-0 p-4 border-b border-black bg-blue-950 shadow-2xl">
       <div className="flex justify-between items-center">
         <img src={img} alt="TICMAS" width={200} />
-        <span className="text-4xl text-white">TO-DO-LIST </span>
+        <span className="text-4xl text-white">TO-DO-LIST</span>
       </div>
     </div>
   );
