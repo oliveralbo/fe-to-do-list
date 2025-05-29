@@ -15,10 +15,13 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  */
 type Documents = {
   'query GetTaskById($id: ID!) {\n  task(id: $id) {\n    ...Task\n  }\n}\n\nquery GetTasks {\n  tasks {\n    ...Task\n  }\n}\n\nfragment Task on Task {\n  id\n  title\n  completed\n  description\n  createdAt\n}': typeof types.GetTaskByIdDocument;
+  'mutation CompleteTask($taskId: ID!) {\n  updateTask(updateTaskInput: {id: $taskId, completed: true}) {\n    ...Task\n  }\n}': typeof types.CompleteTaskDocument;
 };
 const documents: Documents = {
   'query GetTaskById($id: ID!) {\n  task(id: $id) {\n    ...Task\n  }\n}\n\nquery GetTasks {\n  tasks {\n    ...Task\n  }\n}\n\nfragment Task on Task {\n  id\n  title\n  completed\n  description\n  createdAt\n}':
     types.GetTaskByIdDocument,
+  'mutation CompleteTask($taskId: ID!) {\n  updateTask(updateTaskInput: {id: $taskId, completed: true}) {\n    ...Task\n  }\n}':
+    types.CompleteTaskDocument,
 };
 
 /**
@@ -41,6 +44,12 @@ export function graphql(source: string): unknown;
 export function graphql(
   source: 'query GetTaskById($id: ID!) {\n  task(id: $id) {\n    ...Task\n  }\n}\n\nquery GetTasks {\n  tasks {\n    ...Task\n  }\n}\n\nfragment Task on Task {\n  id\n  title\n  completed\n  description\n  createdAt\n}'
 ): (typeof documents)['query GetTaskById($id: ID!) {\n  task(id: $id) {\n    ...Task\n  }\n}\n\nquery GetTasks {\n  tasks {\n    ...Task\n  }\n}\n\nfragment Task on Task {\n  id\n  title\n  completed\n  description\n  createdAt\n}'];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(
+  source: 'mutation CompleteTask($taskId: ID!) {\n  updateTask(updateTaskInput: {id: $taskId, completed: true}) {\n    ...Task\n  }\n}'
+): (typeof documents)['mutation CompleteTask($taskId: ID!) {\n  updateTask(updateTaskInput: {id: $taskId, completed: true}) {\n    ...Task\n  }\n}'];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};

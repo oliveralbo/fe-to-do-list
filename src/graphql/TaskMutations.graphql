@@ -1,0 +1,5 @@
+mutation CompleteTask($taskId: ID!) {
+  updateTask(updateTaskInput: { id: $taskId, completed: true }) {
+    ...Task
+  }
+}
