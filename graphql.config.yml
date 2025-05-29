@@ -1,0 +1,4 @@
+# extention docs
+schema: './schema.graphql'
+documents:
+  - './src/**/*.graphql'
