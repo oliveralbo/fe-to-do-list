@@ -2,6 +2,8 @@
 
 Frontend para la aplicación TodoList desarrollado con React, TypeScript, Vite y Apollo Client.
 
+- [Ticmas | To-Do-List Backend](https://github.com/oliveralbo/be-to-do-list)
+
 ## Prerequisitos
 
 - Node.js (versión 18 o superior)
@@ -102,3 +104,7 @@ npm run dev
 ```
 
 2. Abre [http://localhost:5173](http://localhost:5173) en tu navegador
+
+## Comentarios
+
+- Se decide migrar los test de jest a vitest debido a conflictos entre versionados de @apollo y @jest
