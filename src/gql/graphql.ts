@@ -78,30 +78,45 @@ export type GetTaskByIdQueryVariables = Exact<{
 
 export type GetTaskByIdQuery = {
   __typename?: 'Query';
-  task: {
-    __typename?: 'Task';
-    id: string;
-    title: string;
-    completed: boolean;
-    description: string;
-    createdAt: string;
-  };
+  task: { __typename?: 'Task' } & { ' $fragmentRefs'?: { TaskFragment: TaskFragment } };
 };
 
 export type GetTasksQueryVariables = Exact<{ [key: string]: never }>;
 
 export type GetTasksQuery = {
   __typename?: 'Query';
-  tasks: Array<{
-    __typename?: 'Task';
-    id: string;
-    title: string;
-    completed: boolean;
-    description: string;
-    createdAt: string;
-  }>;
+  tasks: Array<{ __typename?: 'Task' } & { ' $fragmentRefs'?: { TaskFragment: TaskFragment } }>;
 };
 
+export type TaskFragment = {
+  __typename?: 'Task';
+  id: string;
+  title: string;
+  completed: boolean;
+  description: string;
+  createdAt: string;
+} & { ' $fragmentName'?: 'TaskFragment' };
+
+export const TaskFragmentDoc = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'FragmentDefinition',
+      name: { kind: 'Name', value: 'Task' },
+      typeCondition: { kind: 'NamedType', name: { kind: 'Name', value: 'Task' } },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'title' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'completed' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'description' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'createdAt' } },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<TaskFragment, unknown>;
 export const GetTaskByIdDocument = {
   kind: 'Document',
   definitions: [
@@ -134,15 +149,24 @@ export const GetTaskByIdDocument = {
             ],
             selectionSet: {
               kind: 'SelectionSet',
-              selections: [
-                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'title' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'completed' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'description' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'createdAt' } },
-              ],
+              selections: [{ kind: 'FragmentSpread', name: { kind: 'Name', value: 'Task' } }],
             },
           },
+        ],
+      },
+    },
+    {
+      kind: 'FragmentDefinition',
+      name: { kind: 'Name', value: 'Task' },
+      typeCondition: { kind: 'NamedType', name: { kind: 'Name', value: 'Task' } },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'title' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'completed' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'description' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'createdAt' } },
         ],
       },
     },
@@ -163,15 +187,24 @@ export const GetTasksDocument = {
             name: { kind: 'Name', value: 'tasks' },
             selectionSet: {
               kind: 'SelectionSet',
-              selections: [
-                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'title' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'completed' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'description' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'createdAt' } },
-              ],
+              selections: [{ kind: 'FragmentSpread', name: { kind: 'Name', value: 'Task' } }],
             },
           },
+        ],
+      },
+    },
+    {
+      kind: 'FragmentDefinition',
+      name: { kind: 'Name', value: 'Task' },
+      typeCondition: { kind: 'NamedType', name: { kind: 'Name', value: 'Task' } },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'title' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'completed' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'description' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'createdAt' } },
         ],
       },
     },

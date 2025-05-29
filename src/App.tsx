@@ -1,6 +1,6 @@
-import { Header } from "./components/Header";
-import { Home } from "./components/Home";
-import { Layout } from "./components/Layout";
+import { Header } from './components/Header';
+import { Home } from './components/Home';
+import { Layout } from './components/Layout';
 
 function App() {
   return (

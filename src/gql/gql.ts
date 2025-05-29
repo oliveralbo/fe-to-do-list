@@ -14,10 +14,10 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Learn more about it here: https://the-guild.dev/graphql/codegen/plugins/presets/preset-client#reducing-bundle-size
  */
 type Documents = {
-  'query GetTaskById($id: ID!) {\n  task(id: $id) {\n    id\n    title\n    completed\n    description\n    createdAt\n  }\n}\n\nquery GetTasks {\n  tasks {\n    id\n    title\n    completed\n    description\n    createdAt\n  }\n}': typeof types.GetTaskByIdDocument;
+  'query GetTaskById($id: ID!) {\n  task(id: $id) {\n    ...Task\n  }\n}\n\nquery GetTasks {\n  tasks {\n    ...Task\n  }\n}\n\nfragment Task on Task {\n  id\n  title\n  completed\n  description\n  createdAt\n}': typeof types.GetTaskByIdDocument;
 };
 const documents: Documents = {
-  'query GetTaskById($id: ID!) {\n  task(id: $id) {\n    id\n    title\n    completed\n    description\n    createdAt\n  }\n}\n\nquery GetTasks {\n  tasks {\n    id\n    title\n    completed\n    description\n    createdAt\n  }\n}':
+  'query GetTaskById($id: ID!) {\n  task(id: $id) {\n    ...Task\n  }\n}\n\nquery GetTasks {\n  tasks {\n    ...Task\n  }\n}\n\nfragment Task on Task {\n  id\n  title\n  completed\n  description\n  createdAt\n}':
     types.GetTaskByIdDocument,
 };
 
@@ -39,8 +39,8 @@ export function graphql(source: string): unknown;
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(
-  source: 'query GetTaskById($id: ID!) {\n  task(id: $id) {\n    id\n    title\n    completed\n    description\n    createdAt\n  }\n}\n\nquery GetTasks {\n  tasks {\n    id\n    title\n    completed\n    description\n    createdAt\n  }\n}'
-): (typeof documents)['query GetTaskById($id: ID!) {\n  task(id: $id) {\n    id\n    title\n    completed\n    description\n    createdAt\n  }\n}\n\nquery GetTasks {\n  tasks {\n    id\n    title\n    completed\n    description\n    createdAt\n  }\n}'];
+  source: 'query GetTaskById($id: ID!) {\n  task(id: $id) {\n    ...Task\n  }\n}\n\nquery GetTasks {\n  tasks {\n    ...Task\n  }\n}\n\nfragment Task on Task {\n  id\n  title\n  completed\n  description\n  createdAt\n}'
+): (typeof documents)['query GetTaskById($id: ID!) {\n  task(id: $id) {\n    ...Task\n  }\n}\n\nquery GetTasks {\n  tasks {\n    ...Task\n  }\n}\n\nfragment Task on Task {\n  id\n  title\n  completed\n  description\n  createdAt\n}'];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};
