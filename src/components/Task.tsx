@@ -2,6 +2,7 @@ import { useMutation } from '@apollo/client';
 import { TaskForm } from './TaskForm';
 import { CompleteTaskDocument, EditTaskDocument, TaskFragment } from '../gql/graphql';
 import { useState } from 'react';
+import { Button } from './Button';
 
 interface TaskProps {
   task: TaskFragment;
@@ -33,11 +34,14 @@ export const Task = ({ task }: TaskProps) => {
     >
       {!isEditing && (
         <>
-          <div className="flex flex-row justify-between items-center mb-4 gap-2">
-            <h3 className="text-xl uppercase font-semibold">{task.title}</h3>
-            <p className="text-sm sm:text-base">
-              Estado: {task.completed ? 'Completado ✅' : 'Pendiente ⏰'}
-            </p>
+          <div className="flex flex-row justify-between items-start mb-4 gap-2">
+            <div className="">
+              <h3 className="text-xl uppercase font-semibold">{task.title}</h3>
+              <p className="text-sm sm:text-base">
+                Estado: {task.completed ? 'Completado ✅' : 'Pendiente ⏰'}
+              </p>
+            </div>
+            <p className="text-sm hover:cursor-pointer">✖️</p>
           </div>
 
           <div className="flex flex-col lg:flex-row lg:items-start gap-4">
@@ -46,18 +50,8 @@ export const Task = ({ task }: TaskProps) => {
             </div>
 
             <div className="flex flex-col gap-2 lg:w-32">
-              <button
-                className="px-2 border rounded-xl border-black bg-stone-300 hover:bg-stone-500 cursor-pointer lg:w-full"
-                onClick={() => setIsEditing(true)}
-              >
-                Editar
-              </button>
-              <button
-                className="px-2 border rounded-xl border-black bg-stone-300 hover:bg-stone-500 cursor-pointer lg:w-full "
-                onClick={handleComplete}
-              >
-                {!task.completed ? 'Completar' : 'Rehacer'}
-              </button>
+              <Button action={() => setIsEditing(true)}>Editar</Button>
+              <Button action={handleComplete}> {!task.completed ? 'Completar' : 'Rehacer'}</Button>
             </div>
           </div>
         </>
@@ -65,6 +59,13 @@ export const Task = ({ task }: TaskProps) => {
       {isEditing && (
         <TaskForm task={task} onCancel={() => setIsEditing(false)} onSubmit={handleEditSubmit} />
       )}
+
+      {/* <Modal
+        isOpen={showModal}
+        onClose={() => setShowModal(false)}
+        onConfirm={handleDelete}
+        message="¿Está seguro que desea eliminar?"
+      /> */}
     </div>
   );
 };

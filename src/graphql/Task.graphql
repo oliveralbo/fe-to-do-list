@@ -1,11 +1,11 @@
-query GetTaskById($id: ID!) {
-  task(id: $id) {
+query GetTasks {
+  tasks {
     ...Task
   }
 }
 
-query GetTasks {
-  tasks {
+query GetTaskById($id: ID!) {
+  task(id: $id) {
     ...Task
   }
 }

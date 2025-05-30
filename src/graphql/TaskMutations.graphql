@@ -9,3 +9,9 @@ mutation EditTask($taskId: ID!, $title: String, $description: String) {
     ...Task
   }
 }
+
+mutation RemoveTask($taskId: ID!) {
+  removeTask(id: $taskId) {
+    ...Task
+  }
+}

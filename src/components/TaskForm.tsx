@@ -1,4 +1,5 @@
 import { TaskFragment } from '../gql/graphql';
+import { Button } from './Button';
 
 interface TaskFormProps {
   task: TaskFragment;
@@ -28,7 +29,7 @@ export const TaskForm = ({ task, onCancel, onSubmit }: TaskFormProps) => {
         </p>
       </div>
 
-      <div className="flex flex-col lg:flex-row lg:items-start gap-4">
+      <div className="flex flex-col lg:flex-row lg:items-end gap-4">
         <div className="flex-1">
           <textarea
             name="description"
@@ -41,19 +42,12 @@ export const TaskForm = ({ task, onCancel, onSubmit }: TaskFormProps) => {
         </div>
 
         <div className="flex flex-col gap-2 lg:w-32">
-          <button
+          <input
+            value="Aceptar"
             type="submit"
             className="px-2 border rounded-xl border-black bg-stone-300 hover:bg-stone-500 cursor-pointer transition-colors lg:w-full"
-          >
-            Aceptar
-          </button>
-          <button
-            type="button"
-            className="fpx-2 border rounded-xl border-black bg-stone-300 hover:bg-stone-500 cursor-pointer transition-colors lg:w-full"
-            onClick={onCancel}
-          >
-            Cancelar
-          </button>
+          />
+          <Button action={onCancel}>Cancelar</Button>
         </div>
       </div>
     </form>
