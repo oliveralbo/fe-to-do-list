@@ -7,7 +7,7 @@ interface TaskListProps {
 
 export const TaskList = ({ tasks }: TaskListProps) => {
   return (
-    <div className="w-[50%]">
+    <div className="w-full lg:w-[75%]">
       {tasks && tasks.map((task: TaskFragment) => <Task task={task} />)}
     </div>
   );

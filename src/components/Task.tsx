@@ -1,5 +1,6 @@
 import { useMutation } from '@apollo/client';
-import { TaskFragment, CompleteTaskDocument } from '../gql/graphql';
+import { TaskForm } from './TaskForm';
+import { CompleteTaskDocument, EditTaskDocument, TaskFragment } from '../gql/graphql';
 import { useState } from 'react';
 
 interface TaskProps {
@@ -8,63 +9,62 @@ interface TaskProps {
 
 export const Task = ({ task }: TaskProps) => {
   const [completeTask] = useMutation(CompleteTaskDocument);
+  const [editTask] = useMutation(EditTaskDocument);
   const [isEditing, setIsEditing] = useState<boolean>(false);
+
   const completedStyle = 'border-green-800 bg-green-300';
   const uncompletedStyle = 'border-blue-800 bg-blue-300';
 
-  const handleEdit = () => {
-    alert('edit !');
+  const handleEditSubmit = (formData: FormData) => {
+    const title = formData.get('title') as string;
+    const description = formData.get('description') as string;
+    editTask({ variables: { taskId: task.id, title, description } });
+    setIsEditing(false);
   };
+
   const handleComplete = () => {
     completeTask({ variables: { taskId: task.id, status: !task.completed } });
   };
 
   return (
     <div
-      className={`p-2 mb-4 border-3 shadow-xl rounded-2xl ${task.completed ? completedStyle : uncompletedStyle}`}
+      className={`p-4 mb-4 border-3 shadow-xl rounded-2xl ${task.completed ? completedStyle : uncompletedStyle}`}
       key={task.id}
     >
-      <div className="flex justify-between">
-        <h3 className="text-xl uppercase">{task.title}</h3>
-        <p>Status: {task.completed ? 'Completed ✅' : 'Pending ⏰'}</p>
-      </div>
-      <div className="grid grid-cols-5 items-center gap-2">
-        <p className="col-span-4">{task.description}</p>
-        <div className="w-full">
-          {!isEditing && (
-            <>
+      {!isEditing && (
+        <>
+          <div className="flex flex-row justify-between items-center mb-4 gap-2">
+            <h3 className="text-xl uppercase font-semibold">{task.title}</h3>
+            <p className="text-sm sm:text-base">
+              Estado: {task.completed ? 'Completado ✅' : 'Pendiente ⏰'}
+            </p>
+          </div>
+
+          <div className="flex flex-col lg:flex-row lg:items-start gap-4">
+            <div className="flex-1">
+              <p className="text-gray-700">{task.description}</p>
+            </div>
+
+            <div className="flex flex-col gap-2 lg:w-32">
               <button
-                className="w-full mb-2 border rounded-xl border-black bg-stone-300 col-span-1 justify-self-end hover:bg-stone-500 cursor-pointer"
+                className="px-2 border rounded-xl border-black bg-stone-300 hover:bg-stone-500 cursor-pointer transition-colors lg:w-full"
                 onClick={() => setIsEditing(true)}
               >
                 Editar
               </button>
               <button
-                className="w-full border rounded-xl border-black bg-stone-300 col-span-1 justify-self-end hover:bg-stone-500 cursor-pointer"
+                className="px-2 border rounded-xl border-black bg-stone-300 hover:bg-stone-500 cursor-pointer transition-colors lg:w-full "
                 onClick={handleComplete}
               >
                 {!task.completed ? 'Completar' : 'Rehacer'}
               </button>
-            </>
-          )}
-          {isEditing && (
-            <>
-              <button
-                className="w-full mb-2 border rounded-xl border-black bg-stone-300 col-span-1 justify-self-end hover:bg-stone-500 cursor-pointer"
-                onClick={handleEdit}
-              >
-                Aceptar cambios
-              </button>
-              <button
-                className="w-full border rounded-xl border-black bg-stone-300 col-span-1 justify-self-end hover:bg-stone-500 cursor-pointer"
-                onClick={() => setIsEditing(false)}
-              >
-                Cancelar
-              </button>
-            </>
-          )}
-        </div>
-      </div>
+            </div>
+          </div>
+        </>
+      )}
+      {isEditing && (
+        <TaskForm task={task} onCancel={() => setIsEditing(false)} onSubmit={handleEditSubmit} />
+      )}
     </div>
   );
 };
