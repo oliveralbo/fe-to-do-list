@@ -99,6 +99,7 @@ export type TaskFragment = {
 
 export type CompleteTaskMutationVariables = Exact<{
   taskId: Scalars['ID']['input'];
+  status?: InputMaybe<Scalars['Boolean']['input']>;
 }>;
 
 export type CompleteTaskMutation = {
@@ -235,6 +236,11 @@ export const CompleteTaskDocument = {
             type: { kind: 'NamedType', name: { kind: 'Name', value: 'ID' } },
           },
         },
+        {
+          kind: 'VariableDefinition',
+          variable: { kind: 'Variable', name: { kind: 'Name', value: 'status' } },
+          type: { kind: 'NamedType', name: { kind: 'Name', value: 'Boolean' } },
+        },
       ],
       selectionSet: {
         kind: 'SelectionSet',
@@ -257,7 +263,7 @@ export const CompleteTaskDocument = {
                     {
                       kind: 'ObjectField',
                       name: { kind: 'Name', value: 'completed' },
-                      value: { kind: 'BooleanValue', value: true },
+                      value: { kind: 'Variable', name: { kind: 'Name', value: 'status' } },
                     },
                   ],
                 },
