@@ -1,17 +1,27 @@
-import { useMutation } from '@apollo/client';
+import { useMutation, useQuery } from '@apollo/client';
 import { TaskForm } from './TaskForm';
-import { CompleteTaskDocument, EditTaskDocument, TaskFragment } from '../gql/graphql';
+import {
+  CompleteTaskDocument,
+  EditTaskDocument,
+  GetTasksDocument,
+  RemoveTaskDocument,
+  TaskFragment,
+} from '../gql/graphql';
 import { useState } from 'react';
 import { Button } from './Button';
+import { ConfirmationModal } from './ConfirmationModal';
 
 interface TaskProps {
   task: TaskFragment;
 }
 
 export const Task = ({ task }: TaskProps) => {
+  const { refetch } = useQuery(GetTasksDocument);
+  const [showModal, setShowModal] = useState<boolean>(false);
+  const [isEditing, setIsEditing] = useState<boolean>(false);
   const [completeTask] = useMutation(CompleteTaskDocument);
   const [editTask] = useMutation(EditTaskDocument);
-  const [isEditing, setIsEditing] = useState<boolean>(false);
+  const [removeTask] = useMutation(RemoveTaskDocument);
 
   const completedStyle = 'border-green-800 bg-green-300';
   const pendingStyle = 'border-blue-800 bg-blue-300';
@@ -25,6 +35,12 @@ export const Task = ({ task }: TaskProps) => {
 
   const handleComplete = () => {
     completeTask({ variables: { taskId: task.id, status: !task.completed } });
+  };
+
+  const handleDelete = () => {
+    removeTask({ variables: { taskId: task.id } });
+    setShowModal(false);
+    refetch();
   };
 
   return (
@@ -41,7 +57,9 @@ export const Task = ({ task }: TaskProps) => {
                 Estado: {task.completed ? 'Completado ✅' : 'Pendiente ⏰'}
               </p>
             </div>
-            <p className="text-sm hover:cursor-pointer">✖️</p>
+            <p className="text-sm hover:cursor-pointer" onClick={() => setShowModal(true)}>
+              ✖️
+            </p>
           </div>
 
           <div className="flex flex-col lg:flex-row lg:items-start gap-4">
@@ -60,12 +78,12 @@ export const Task = ({ task }: TaskProps) => {
         <TaskForm task={task} onCancel={() => setIsEditing(false)} onSubmit={handleEditSubmit} />
       )}
 
-      {/* <Modal
+      <ConfirmationModal
         isOpen={showModal}
         onClose={() => setShowModal(false)}
         onConfirm={handleDelete}
-        message="¿Está seguro que desea eliminar?"
-      /> */}
+        message="¿Está seguro que desea eliminar la tarea?"
+      />
     </div>
   );
 };

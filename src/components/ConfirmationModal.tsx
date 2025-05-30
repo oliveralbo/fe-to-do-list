@@ -1,3 +1,5 @@
+import { Button } from './Button';
+
 interface ConfirmationModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -12,17 +14,19 @@ export const ConfirmationModal = ({
   message,
 }: ConfirmationModalProps) => {
   if (!isOpen) return null;
+
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-      <div className="bg-white p-6 rounded-lg">
-        <p className="mb-4">{message}</p>
-        <div className="flex gap-2">
-          <button onClick={onClose} className="px-4 py-2 bg-gray-200 rounded">
-            Cancelar
-          </button>
-          <button onClick={onConfirm} className="px-4 py-2 bg-red-500 text-white rounded">
-            Aceptar
-          </button>
+    //inset-0 --> make full screen
+    <div className="fixed inset-0 z-50 flex items-center justify-center shadow-4xl">
+      {/* Background transparent dark */}
+      <div className="absolute inset-0 bg-black/50 pointer-events-auto" onClick={onClose} />
+
+      {/* Modal */}
+      <div className="relative z-10 bg-white p-6 rounded-lg shadow-lg w-full max-w-sm">
+        <p className="mb-4 text-center">{message}</p>
+        <div className="flex justify-end gap-2">
+          <Button action={onConfirm}>Aceptar</Button>
+          <Button action={onClose}>Cancelar</Button>
         </div>
       </div>
     </div>

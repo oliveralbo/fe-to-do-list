@@ -72,6 +72,13 @@ export type UpdateTaskInput = {
   title?: InputMaybe<Scalars['String']['input']>;
 };
 
+export type GetTasksQueryVariables = Exact<{ [key: string]: never }>;
+
+export type GetTasksQuery = {
+  __typename?: 'Query';
+  tasks: Array<{ __typename?: 'Task' } & { ' $fragmentRefs'?: { TaskFragment: TaskFragment } }>;
+};
+
 export type GetTaskByIdQueryVariables = Exact<{
   id: Scalars['ID']['input'];
 }>;
@@ -79,13 +86,6 @@ export type GetTaskByIdQueryVariables = Exact<{
 export type GetTaskByIdQuery = {
   __typename?: 'Query';
   task: { __typename?: 'Task' } & { ' $fragmentRefs'?: { TaskFragment: TaskFragment } };
-};
-
-export type GetTasksQueryVariables = Exact<{ [key: string]: never }>;
-
-export type GetTasksQuery = {
-  __typename?: 'Query';
-  tasks: Array<{ __typename?: 'Task' } & { ' $fragmentRefs'?: { TaskFragment: TaskFragment } }>;
 };
 
 export type TaskFragment = {
@@ -118,6 +118,15 @@ export type EditTaskMutation = {
   updateTask: { __typename?: 'Task' } & { ' $fragmentRefs'?: { TaskFragment: TaskFragment } };
 };
 
+export type RemoveTaskMutationVariables = Exact<{
+  taskId: Scalars['ID']['input'];
+}>;
+
+export type RemoveTaskMutation = {
+  __typename?: 'Mutation';
+  removeTask: { __typename?: 'Task' } & { ' $fragmentRefs'?: { TaskFragment: TaskFragment } };
+};
+
 export const TaskFragmentDoc = {
   kind: 'Document',
   definitions: [
@@ -138,6 +147,44 @@ export const TaskFragmentDoc = {
     },
   ],
 } as unknown as DocumentNode<TaskFragment, unknown>;
+export const GetTasksDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'query',
+      name: { kind: 'Name', value: 'GetTasks' },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'tasks' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [{ kind: 'FragmentSpread', name: { kind: 'Name', value: 'Task' } }],
+            },
+          },
+        ],
+      },
+    },
+    {
+      kind: 'FragmentDefinition',
+      name: { kind: 'Name', value: 'Task' },
+      typeCondition: { kind: 'NamedType', name: { kind: 'Name', value: 'Task' } },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'title' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'completed' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'description' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'createdAt' } },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<GetTasksQuery, GetTasksQueryVariables>;
 export const GetTaskByIdDocument = {
   kind: 'Document',
   definitions: [
@@ -193,44 +240,6 @@ export const GetTaskByIdDocument = {
     },
   ],
 } as unknown as DocumentNode<GetTaskByIdQuery, GetTaskByIdQueryVariables>;
-export const GetTasksDocument = {
-  kind: 'Document',
-  definitions: [
-    {
-      kind: 'OperationDefinition',
-      operation: 'query',
-      name: { kind: 'Name', value: 'GetTasks' },
-      selectionSet: {
-        kind: 'SelectionSet',
-        selections: [
-          {
-            kind: 'Field',
-            name: { kind: 'Name', value: 'tasks' },
-            selectionSet: {
-              kind: 'SelectionSet',
-              selections: [{ kind: 'FragmentSpread', name: { kind: 'Name', value: 'Task' } }],
-            },
-          },
-        ],
-      },
-    },
-    {
-      kind: 'FragmentDefinition',
-      name: { kind: 'Name', value: 'Task' },
-      typeCondition: { kind: 'NamedType', name: { kind: 'Name', value: 'Task' } },
-      selectionSet: {
-        kind: 'SelectionSet',
-        selections: [
-          { kind: 'Field', name: { kind: 'Name', value: 'id' } },
-          { kind: 'Field', name: { kind: 'Name', value: 'title' } },
-          { kind: 'Field', name: { kind: 'Name', value: 'completed' } },
-          { kind: 'Field', name: { kind: 'Name', value: 'description' } },
-          { kind: 'Field', name: { kind: 'Name', value: 'createdAt' } },
-        ],
-      },
-    },
-  ],
-} as unknown as DocumentNode<GetTasksQuery, GetTasksQueryVariables>;
 export const CompleteTaskDocument = {
   kind: 'Document',
   definitions: [
@@ -389,3 +398,58 @@ export const EditTaskDocument = {
     },
   ],
 } as unknown as DocumentNode<EditTaskMutation, EditTaskMutationVariables>;
+export const RemoveTaskDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'mutation',
+      name: { kind: 'Name', value: 'RemoveTask' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: { kind: 'Variable', name: { kind: 'Name', value: 'taskId' } },
+          type: {
+            kind: 'NonNullType',
+            type: { kind: 'NamedType', name: { kind: 'Name', value: 'ID' } },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'removeTask' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'id' },
+                value: { kind: 'Variable', name: { kind: 'Name', value: 'taskId' } },
+              },
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [{ kind: 'FragmentSpread', name: { kind: 'Name', value: 'Task' } }],
+            },
+          },
+        ],
+      },
+    },
+    {
+      kind: 'FragmentDefinition',
+      name: { kind: 'Name', value: 'Task' },
+      typeCondition: { kind: 'NamedType', name: { kind: 'Name', value: 'Task' } },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'title' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'completed' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'description' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'createdAt' } },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<RemoveTaskMutation, RemoveTaskMutationVariables>;
