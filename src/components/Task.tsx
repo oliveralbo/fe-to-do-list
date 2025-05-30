@@ -13,7 +13,7 @@ export const Task = ({ task }: TaskProps) => {
   const [isEditing, setIsEditing] = useState<boolean>(false);
 
   const completedStyle = 'border-green-800 bg-green-300';
-  const uncompletedStyle = 'border-blue-800 bg-blue-300';
+  const pendingStyle = 'border-blue-800 bg-blue-300';
 
   const handleEditSubmit = (formData: FormData) => {
     const title = formData.get('title') as string;
@@ -28,7 +28,7 @@ export const Task = ({ task }: TaskProps) => {
 
   return (
     <div
-      className={`p-4 mb-4 border-3 shadow-xl rounded-2xl ${task.completed ? completedStyle : uncompletedStyle}`}
+      className={`p-4 mb-4 border-3 shadow-xl rounded-2xl ${task.completed ? completedStyle : pendingStyle}`}
       key={task.id}
     >
       {!isEditing && (
@@ -47,13 +47,13 @@ export const Task = ({ task }: TaskProps) => {
 
             <div className="flex flex-col gap-2 lg:w-32">
               <button
-                className="px-2 border rounded-xl border-black bg-stone-300 hover:bg-stone-500 cursor-pointer transition-colors lg:w-full"
+                className="px-2 border rounded-xl border-black bg-stone-300 hover:bg-stone-500 cursor-pointer lg:w-full"
                 onClick={() => setIsEditing(true)}
               >
                 Editar
               </button>
               <button
-                className="px-2 border rounded-xl border-black bg-stone-300 hover:bg-stone-500 cursor-pointer transition-colors lg:w-full "
+                className="px-2 border rounded-xl border-black bg-stone-300 hover:bg-stone-500 cursor-pointer lg:w-full "
                 onClick={handleComplete}
               >
                 {!task.completed ? 'Completar' : 'Rehacer'}
