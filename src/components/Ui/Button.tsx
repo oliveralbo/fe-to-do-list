@@ -1,6 +1,6 @@
 interface ButtonProps {
   children: React.ReactNode;
-  action: () => void;
+  action?: () => void;
 }
 
 export const Button = ({ children, action }: ButtonProps) => {

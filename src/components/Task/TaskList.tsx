@@ -1,10 +1,12 @@
 import { GetTasksDocument, RemoveTaskDocument, TaskFragment } from '../../gql/graphql';
 import { useMutation, useQuery } from '@apollo/client/react/hooks';
 import { Task } from './Task';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { ConfirmationModal } from '../Ui/ConfirmationModal';
+import { FilterState, TaskContext } from '../../contexts/TaskContext';
 
 export const TaskList = () => {
+  const { filter } = useContext(TaskContext);
   const { data, loading, error, refetch } = useQuery(GetTasksDocument);
   const [removeTask] = useMutation(RemoveTaskDocument);
   const [taskToDelete, setTaskToDelete] = useState<TaskFragment | null>(null);
@@ -24,9 +26,15 @@ export const TaskList = () => {
     setTaskToDelete(null);
   };
 
-  const ordererTasks = [...tasks].sort(
-    (a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
-  );
+  const ordererTasks = [...tasks]
+    .sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime())
+    .filter((task) =>
+      filter === FilterState.COMPLETED
+        ? task.completed
+        : filter === FilterState.PENDING
+          ? !task.completed
+          : true
+    );
 
   return (
     <>
