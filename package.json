@@ -59,9 +59,5 @@
     "*.{json,md}": [
       "prettier --write"
     ]
-  },
-  "graphql": {
-    "schema": "https://localhost:3000/graphql",
-    "documents": "**/*.{graphql,js,ts,jsx,tsx}"
   }
 }

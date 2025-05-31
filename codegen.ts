@@ -1,7 +1,9 @@
 import type { CodegenConfig } from '@graphql-codegen/cli';
+import * as dotenv from 'dotenv';
+dotenv.config();
 
 const config: CodegenConfig = {
-  schema: 'http://localhost:3000/graphql',
+  schema: `${process.env.VITE_BACKEND_URL}/graphql`,
   documents: ['src/graphql/**/*.graphql'],
   generates: {
     './src/gql/': {
