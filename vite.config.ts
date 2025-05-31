@@ -9,7 +9,7 @@ export default defineConfig({
   plugins: [react(), tailwindcss()],
   server: {
     proxy: {
-      '/graphql/': {
+      'graphql/': {
         target: process.env.VITE_BACKEND_URL,
         changeOrigin: true,
         secure: false,
