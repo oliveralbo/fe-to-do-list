@@ -2,7 +2,10 @@
 
 Frontend para la aplicación TodoList desarrollado con React, TypeScript, Vite y Apollo Client.
 
-- [Ticmas | To-Do-List Backend](https://github.com/oliveralbo/be-to-do-list)
+## Repositorios Relacionados
+
+- [Frontend](https://github.com/oliveralbo/fe-to-do-list) - Aplicación frontend de TodoList(este repositorio)
+- [Backend](https://github.com/oliveralbo/be-to-do-list) - API backend de TodoList
 
 ## Prerequisitos
 
