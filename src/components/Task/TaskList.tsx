@@ -3,10 +3,10 @@ import { useMutation, useQuery } from '@apollo/client/react/hooks';
 import { Task } from './Task';
 import { useContext, useState } from 'react';
 import { ConfirmationModal } from '../Ui/ConfirmationModal';
-import { FilterState, TaskContext } from '../../contexts/TaskContext';
+import { FilterState, FilterContext } from '../../contexts/FilterContext';
 
 export const TaskList = () => {
-  const { filter } = useContext(TaskContext);
+  const { filter, search } = useContext(FilterContext);
   const { data, loading, error, refetch } = useQuery(GetTasksDocument);
   const [removeTask] = useMutation(RemoveTaskDocument);
   const [taskToDelete, setTaskToDelete] = useState<TaskFragment | null>(null);
@@ -34,7 +34,8 @@ export const TaskList = () => {
         : filter === FilterState.PENDING
           ? !task.completed
           : true
-    );
+    )
+    .filter((task) => task.title.includes(search));
 
   return (
     <>

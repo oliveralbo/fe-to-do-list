@@ -1,11 +1,12 @@
 import { useContext, useState } from 'react';
 import { Button } from '../Ui/Button';
-import { FilterState, TaskContext } from '../../contexts/TaskContext';
+import { FilterContext, FilterState } from '../../contexts/FilterContext';
 import { useMutation, useQuery } from '@apollo/client';
 import { CreateTaskDocument, GetTasksDocument } from '../../gql/graphql';
 import { ConfirmationModal } from '../Ui/ConfirmationModal';
 import { TaskForm } from './TaskForm';
 import { FilterButton } from '../Ui/FilterButton';
+import { SearchInput } from '../Ui/SearchInput';
 
 const isClickedInitialValues = {
   [FilterState.ALL]: false,
@@ -15,7 +16,7 @@ const isClickedInitialValues = {
 
 export const MenuBar = () => {
   const { refetch } = useQuery(GetTasksDocument);
-  const { setFilter } = useContext(TaskContext);
+  const { setFilter, setSearch } = useContext(FilterContext);
   const [createTask] = useMutation(CreateTaskDocument);
   const [showModal, setShowModal] = useState<boolean>(false);
   const [isClicked, setIsClicked] = useState(isClickedInitialValues);
@@ -38,11 +39,10 @@ export const MenuBar = () => {
 
   return (
     <div className="border w-full py-4 rounded-lg border-black bg-blue-900 flex justify-evenly mb-4">
-      <div className="border flex justify-around">
-        <label>search</label>
-        <input type="text" />
+      <div>
+        <SearchInput setSearch={setSearch} />
       </div>
-      <div className=" w-[30%] flex justify-around">
+      <div className="w-[30%] flex justify-around">
         <FilterButton
           isClicked={isClicked[FilterState.ALL]}
           action={() => handleFilter(FilterState.ALL)}

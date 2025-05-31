@@ -1,5 +1,4 @@
 import { createContext } from 'react';
-import { TaskFragment } from '../gql/graphql';
 
 export enum FilterState {
   PENDING = 'Pendiente',
@@ -7,13 +6,16 @@ export enum FilterState {
   ALL = 'All',
 }
 
-export interface TaskContextType {
+export interface FilterContextType {
   filter: FilterState;
-  task?: TaskFragment | null;
+  search: string;
+  setSearch: (x: string) => void;
   setFilter: (filter: FilterState) => void;
 }
 
-export const TaskContext = createContext<TaskContextType>({
+export const FilterContext = createContext<FilterContextType>({
   filter: FilterState.ALL,
+  search: '',
   setFilter: () => {},
+  setSearch: () => {},
 });

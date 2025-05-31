@@ -1,7 +1,7 @@
 interface ChipButtonProps {
   children: React.ReactNode;
   action?: () => void;
-  isClicked?: boolean;
+  isClicked: boolean;
 }
 
 export const FilterButton = ({ children, isClicked = false, action }: ChipButtonProps) => {
