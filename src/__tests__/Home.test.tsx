@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { render } from '@testing-library/react';
 import { MockedProvider } from '@apollo/client/testing';
-import { Home } from '../components/Home';
+import { Home } from '../components/Pages/Home';
 
 describe('Home Component', () => {
   it('renders without crashing', () => {

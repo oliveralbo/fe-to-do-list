@@ -1,8 +1,8 @@
 import { useMutation } from '@apollo/client';
 import { TaskForm } from './TaskForm';
-import { CompleteTaskDocument, EditTaskDocument, TaskFragment } from '../gql/graphql';
+import { CompleteTaskDocument, EditTaskDocument, TaskFragment } from '../../gql/graphql';
 import { Dispatch, SetStateAction, useState } from 'react';
-import { Button } from './Button';
+import { Button } from '../Ui/Button';
 
 interface TaskProps {
   task: TaskFragment;

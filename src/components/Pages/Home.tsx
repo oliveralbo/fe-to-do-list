@@ -1,5 +1,5 @@
-import { MenuBar } from './MenuBar';
-import { TaskList } from './TaskList';
+import { MenuBar } from '../Task/MenuBar';
+import { TaskList } from '../Task/TaskList';
 
 export const Home = () => {
   return (

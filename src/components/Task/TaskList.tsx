@@ -1,8 +1,8 @@
-import { GetTasksDocument, RemoveTaskDocument, TaskFragment } from '../gql/graphql';
+import { GetTasksDocument, RemoveTaskDocument, TaskFragment } from '../../gql/graphql';
 import { useMutation, useQuery } from '@apollo/client/react/hooks';
 import { Task } from './Task';
 import { useState } from 'react';
-import { ConfirmationModal } from './ConfirmationModal';
+import { ConfirmationModal } from '../Ui/ConfirmationModal';
 
 export const TaskList = () => {
   const { data, loading, error, refetch } = useQuery(GetTasksDocument);

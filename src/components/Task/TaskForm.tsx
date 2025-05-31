@@ -1,5 +1,5 @@
-import { TaskFragment } from '../gql/graphql';
-import { Button } from './Button';
+import { TaskFragment } from '../../gql/graphql';
+import { Button } from '../Ui/Button';
 
 interface TaskFormProps {
   task: TaskFragment;
