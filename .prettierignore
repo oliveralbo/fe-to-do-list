@@ -5,6 +5,8 @@ build/
 # Dependencies
 node_modules/
 
+src/gql
+
 # Coverage directory
 coverage/
 

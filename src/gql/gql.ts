@@ -14,14 +14,12 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Learn more about it here: https://the-guild.dev/graphql/codegen/plugins/presets/preset-client#reducing-bundle-size
  */
 type Documents = {
-  'query GetTasks {\n  tasks {\n    ...Task\n  }\n}\n\nquery GetTaskById($id: ID!) {\n  task(id: $id) {\n    ...Task\n  }\n}\n\nfragment Task on Task {\n  id\n  title\n  completed\n  description\n  createdAt\n}': typeof types.GetTasksDocument;
-  'mutation CreateTask($title: String!, $description: String) {\n  createTask(createTaskInput: {title: $title, description: $description}) {\n    ...Task\n  }\n}\n\nmutation CompleteTask($taskId: ID!, $status: Boolean) {\n  updateTask(updateTaskInput: {id: $taskId, completed: $status}) {\n    ...Task\n  }\n}\n\nmutation EditTask($taskId: ID!, $title: String, $description: String) {\n  updateTask(\n    updateTaskInput: {id: $taskId, title: $title, description: $description}\n  ) {\n    ...Task\n  }\n}\n\nmutation RemoveTask($taskId: ID!) {\n  removeTask(id: $taskId) {\n    title\n    completed\n    description\n    createdAt\n  }\n}': typeof types.CreateTaskDocument;
+    "query GetTasks {\n  tasks {\n    ...Task\n  }\n}\n\nquery GetTaskById($id: ID!) {\n  task(id: $id) {\n    ...Task\n  }\n}\n\nfragment Task on Task {\n  id\n  title\n  completed\n  description\n  createdAt\n}": typeof types.GetTasksDocument,
+    "mutation CreateTask($title: String!, $description: String) {\n  createTask(createTaskInput: {title: $title, description: $description}) {\n    ...Task\n  }\n}\n\nmutation CompleteTask($taskId: ID!, $status: Boolean) {\n  updateTask(updateTaskInput: {id: $taskId, completed: $status}) {\n    ...Task\n  }\n}\n\nmutation EditTask($taskId: ID!, $title: String, $description: String) {\n  updateTask(\n    updateTaskInput: {id: $taskId, title: $title, description: $description}\n  ) {\n    ...Task\n  }\n}\n\nmutation RemoveTask($taskId: ID!) {\n  removeTask(id: $taskId) {\n    title\n    completed\n    description\n    createdAt\n  }\n}": typeof types.CreateTaskDocument,
 };
 const documents: Documents = {
-  'query GetTasks {\n  tasks {\n    ...Task\n  }\n}\n\nquery GetTaskById($id: ID!) {\n  task(id: $id) {\n    ...Task\n  }\n}\n\nfragment Task on Task {\n  id\n  title\n  completed\n  description\n  createdAt\n}':
-    types.GetTasksDocument,
-  'mutation CreateTask($title: String!, $description: String) {\n  createTask(createTaskInput: {title: $title, description: $description}) {\n    ...Task\n  }\n}\n\nmutation CompleteTask($taskId: ID!, $status: Boolean) {\n  updateTask(updateTaskInput: {id: $taskId, completed: $status}) {\n    ...Task\n  }\n}\n\nmutation EditTask($taskId: ID!, $title: String, $description: String) {\n  updateTask(\n    updateTaskInput: {id: $taskId, title: $title, description: $description}\n  ) {\n    ...Task\n  }\n}\n\nmutation RemoveTask($taskId: ID!) {\n  removeTask(id: $taskId) {\n    title\n    completed\n    description\n    createdAt\n  }\n}':
-    types.CreateTaskDocument,
+    "query GetTasks {\n  tasks {\n    ...Task\n  }\n}\n\nquery GetTaskById($id: ID!) {\n  task(id: $id) {\n    ...Task\n  }\n}\n\nfragment Task on Task {\n  id\n  title\n  completed\n  description\n  createdAt\n}": types.GetTasksDocument,
+    "mutation CreateTask($title: String!, $description: String) {\n  createTask(createTaskInput: {title: $title, description: $description}) {\n    ...Task\n  }\n}\n\nmutation CompleteTask($taskId: ID!, $status: Boolean) {\n  updateTask(updateTaskInput: {id: $taskId, completed: $status}) {\n    ...Task\n  }\n}\n\nmutation EditTask($taskId: ID!, $title: String, $description: String) {\n  updateTask(\n    updateTaskInput: {id: $taskId, title: $title, description: $description}\n  ) {\n    ...Task\n  }\n}\n\nmutation RemoveTask($taskId: ID!) {\n  removeTask(id: $taskId) {\n    title\n    completed\n    description\n    createdAt\n  }\n}": types.CreateTaskDocument,
 };
 
 /**
@@ -41,19 +39,14 @@ export function graphql(source: string): unknown;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(
-  source: 'query GetTasks {\n  tasks {\n    ...Task\n  }\n}\n\nquery GetTaskById($id: ID!) {\n  task(id: $id) {\n    ...Task\n  }\n}\n\nfragment Task on Task {\n  id\n  title\n  completed\n  description\n  createdAt\n}'
-): (typeof documents)['query GetTasks {\n  tasks {\n    ...Task\n  }\n}\n\nquery GetTaskById($id: ID!) {\n  task(id: $id) {\n    ...Task\n  }\n}\n\nfragment Task on Task {\n  id\n  title\n  completed\n  description\n  createdAt\n}'];
+export function graphql(source: "query GetTasks {\n  tasks {\n    ...Task\n  }\n}\n\nquery GetTaskById($id: ID!) {\n  task(id: $id) {\n    ...Task\n  }\n}\n\nfragment Task on Task {\n  id\n  title\n  completed\n  description\n  createdAt\n}"): (typeof documents)["query GetTasks {\n  tasks {\n    ...Task\n  }\n}\n\nquery GetTaskById($id: ID!) {\n  task(id: $id) {\n    ...Task\n  }\n}\n\nfragment Task on Task {\n  id\n  title\n  completed\n  description\n  createdAt\n}"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(
-  source: 'mutation CreateTask($title: String!, $description: String) {\n  createTask(createTaskInput: {title: $title, description: $description}) {\n    ...Task\n  }\n}\n\nmutation CompleteTask($taskId: ID!, $status: Boolean) {\n  updateTask(updateTaskInput: {id: $taskId, completed: $status}) {\n    ...Task\n  }\n}\n\nmutation EditTask($taskId: ID!, $title: String, $description: String) {\n  updateTask(\n    updateTaskInput: {id: $taskId, title: $title, description: $description}\n  ) {\n    ...Task\n  }\n}\n\nmutation RemoveTask($taskId: ID!) {\n  removeTask(id: $taskId) {\n    title\n    completed\n    description\n    createdAt\n  }\n}'
-): (typeof documents)['mutation CreateTask($title: String!, $description: String) {\n  createTask(createTaskInput: {title: $title, description: $description}) {\n    ...Task\n  }\n}\n\nmutation CompleteTask($taskId: ID!, $status: Boolean) {\n  updateTask(updateTaskInput: {id: $taskId, completed: $status}) {\n    ...Task\n  }\n}\n\nmutation EditTask($taskId: ID!, $title: String, $description: String) {\n  updateTask(\n    updateTaskInput: {id: $taskId, title: $title, description: $description}\n  ) {\n    ...Task\n  }\n}\n\nmutation RemoveTask($taskId: ID!) {\n  removeTask(id: $taskId) {\n    title\n    completed\n    description\n    createdAt\n  }\n}'];
+export function graphql(source: "mutation CreateTask($title: String!, $description: String) {\n  createTask(createTaskInput: {title: $title, description: $description}) {\n    ...Task\n  }\n}\n\nmutation CompleteTask($taskId: ID!, $status: Boolean) {\n  updateTask(updateTaskInput: {id: $taskId, completed: $status}) {\n    ...Task\n  }\n}\n\nmutation EditTask($taskId: ID!, $title: String, $description: String) {\n  updateTask(\n    updateTaskInput: {id: $taskId, title: $title, description: $description}\n  ) {\n    ...Task\n  }\n}\n\nmutation RemoveTask($taskId: ID!) {\n  removeTask(id: $taskId) {\n    title\n    completed\n    description\n    createdAt\n  }\n}"): (typeof documents)["mutation CreateTask($title: String!, $description: String) {\n  createTask(createTaskInput: {title: $title, description: $description}) {\n    ...Task\n  }\n}\n\nmutation CompleteTask($taskId: ID!, $status: Boolean) {\n  updateTask(updateTaskInput: {id: $taskId, completed: $status}) {\n    ...Task\n  }\n}\n\nmutation EditTask($taskId: ID!, $title: String, $description: String) {\n  updateTask(\n    updateTaskInput: {id: $taskId, title: $title, description: $description}\n  ) {\n    ...Task\n  }\n}\n\nmutation RemoveTask($taskId: ID!) {\n  removeTask(id: $taskId) {\n    title\n    completed\n    description\n    createdAt\n  }\n}"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};
 }
 
-export type DocumentType<TDocumentNode extends DocumentNode<any, any>> =
-  TDocumentNode extends DocumentNode<infer TType, any> ? TType : never;
+export type DocumentType<TDocumentNode extends DocumentNode<any, any>> = TDocumentNode extends DocumentNode<  infer TType,  any>  ? TType  : never;
