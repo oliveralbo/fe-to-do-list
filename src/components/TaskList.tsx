@@ -12,7 +12,7 @@ export const TaskList = () => {
 
   return (
     <div className="w-full lg:w-[75%]">
-      {tasks && tasks.map((task: TaskFragment) => <Task task={task} />)}
+      {tasks && tasks.map((task: TaskFragment) => <Task key={task.id} task={task} />)}
     </div>
   );
 };

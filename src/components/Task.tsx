@@ -37,8 +37,13 @@ export const Task = ({ task }: TaskProps) => {
     completeTask({ variables: { taskId: task.id, status: !task.completed } });
   };
 
-  const handleDelete = () => {
-    removeTask({ variables: { taskId: task.id } });
+  const handleDelete = async () => {
+    try {
+      await removeTask({ variables: { taskId: task.id } });
+    } catch (e) {
+      console.log(e);
+    }
+
     setShowModal(false);
     refetch();
   };
@@ -46,7 +51,6 @@ export const Task = ({ task }: TaskProps) => {
   return (
     <div
       className={`p-4 mb-4 border-3 shadow-xl rounded-2xl ${task.completed ? completedStyle : pendingStyle}`}
-      key={task.id}
     >
       {!isEditing && (
         <>
@@ -82,7 +86,7 @@ export const Task = ({ task }: TaskProps) => {
         isOpen={showModal}
         onClose={() => setShowModal(false)}
         onConfirm={handleDelete}
-        message="¿Está seguro que desea eliminar la tarea?"
+        message={`¿Está seguro que desea eliminar la tarea "${task.title}"?`}
       />
     </div>
   );
