@@ -24,11 +24,16 @@ export const TaskList = () => {
     setTaskToDelete(null);
   };
 
+  // directly task is freeze by data.tasks
+  const ordererTasks = [...tasks].sort(
+    (a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+  );
+
   return (
     <>
       <div className="w-full lg:w-[75%]">
-        {tasks &&
-          tasks.map((task: TaskFragment) => (
+        {ordererTasks &&
+          ordererTasks.map((task: TaskFragment) => (
             <Task key={task.id} task={task} setTaskToDelete={setTaskToDelete} />
           ))}
       </div>

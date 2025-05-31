@@ -2,6 +2,7 @@ import { useMutation } from '@apollo/client';
 import { TaskForm } from './TaskForm';
 import { CompleteTaskDocument, EditTaskDocument, TaskFragment } from '../gql/graphql';
 import { Dispatch, SetStateAction, useState } from 'react';
+import { format } from 'date-fns';
 import { Button } from './Button';
 
 interface TaskProps {
@@ -35,15 +36,18 @@ export const Task = ({ task, setTaskToDelete }: TaskProps) => {
       {!isEditing && (
         <>
           <div className="flex flex-row justify-between items-start mb-4 gap-2">
-            <div className="">
+            <div>
               <h3 className="text-xl uppercase font-semibold">{task.title}</h3>
               <p className="text-sm sm:text-base">
                 Estado: {task.completed ? 'Completado ✅' : 'Pendiente ⏰'}
               </p>
             </div>
-            <p className="text-sm hover:cursor-pointer" onClick={() => setTaskToDelete(task)}>
-              ✖️
-            </p>
+            <div>
+              <span className="text-sm mr-4">{format(new Date(task.createdAt), 'dd/MM/yyyy')}</span>
+              <span className="text-sm hover:cursor-pointer" onClick={() => setTaskToDelete(task)}>
+                ✖️
+              </span>
+            </div>
           </div>
 
           <div className="flex flex-col lg:flex-row lg:items-start gap-4">
