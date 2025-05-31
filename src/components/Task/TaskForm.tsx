@@ -2,7 +2,7 @@ import { TaskFragment } from '../../gql/graphql';
 import { Button } from '../Ui/Button';
 
 interface TaskFormProps {
-  task: TaskFragment;
+  task?: TaskFragment;
   onCancel: () => void;
   onSubmit: (formData: FormData) => void;
 }
@@ -19,21 +19,18 @@ export const TaskForm = ({ task, onCancel, onSubmit }: TaskFormProps) => {
       <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-4 gap-2">
         <input
           name="title"
-          defaultValue={task.title}
+          defaultValue={task?.title}
           className="text-xl uppercase font-semibold bg-transparent border-b-2 border-gray-400 focus:border-gray-600 outline-none flex-1"
           placeholder="Título de la tarea"
           required
         />
-        <p className="text-sm sm:text-base">
-          Status: {task.completed ? 'Completed ✅' : 'Pending ⏰'}
-        </p>
       </div>
 
       <div className="flex flex-col lg:flex-row lg:items-end gap-4">
         <div className="flex-1">
           <textarea
             name="description"
-            defaultValue={task.description}
+            defaultValue={task?.description}
             className="w-full p-2 border-2 border-gray-300 rounded-lg focus:border-gray-500 outline-none resize-none"
             rows={3}
             placeholder="Descripción de la tarea"

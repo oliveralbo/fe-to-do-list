@@ -48,7 +48,7 @@ export const TaskList = () => {
         isOpen={!!taskToDelete}
         onClose={() => setTaskToDelete(null)}
         onConfirm={handleDelete}
-        message={`¿Está seguro que desea eliminar la tarea "${taskToDelete?.title}"?`}
+        children={`¿Está seguro que desea eliminar la tarea "${taskToDelete?.title}"?`}
       />
     </>
   );

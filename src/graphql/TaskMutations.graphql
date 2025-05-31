@@ -1,3 +1,9 @@
+mutation CreateTask($title: String!, $description: String) {
+  createTask(createTaskInput: { title: $title, description: $description }) {
+    ...Task
+  }
+}
+
 mutation CompleteTask($taskId: ID!, $status: Boolean) {
   updateTask(updateTaskInput: { id: $taskId, completed: $status }) {
     ...Task
