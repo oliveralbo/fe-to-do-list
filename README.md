@@ -8,7 +8,7 @@ Frontend para la aplicación TodoList desarrollado con React, TypeScript, Vite y
 
 - Node.js (versión 18 o superior)
 - npm (incluido con Node.js)
-- Backend corriendo en http://localhost:3000 (ver [backend-todolist](https://github.com/oliverio/backend-todolist))
+- Backend corriendo en http://localhost:3000
 
 ## Instalación
 
