@@ -2,7 +2,6 @@ import { useMutation } from '@apollo/client';
 import { TaskForm } from './TaskForm';
 import { CompleteTaskDocument, EditTaskDocument, TaskFragment } from '../gql/graphql';
 import { Dispatch, SetStateAction, useState } from 'react';
-import { format } from 'date-fns';
 import { Button } from './Button';
 
 interface TaskProps {
@@ -29,6 +28,7 @@ export const Task = ({ task, setTaskToDelete }: TaskProps) => {
     completeTask({ variables: { taskId: task.id, status: !task.completed } });
   };
 
+  const date = new Date(task.createdAt);
   return (
     <div
       className={`p-4 mb-4 border-3 shadow-xl rounded-2xl ${task.completed ? completedStyle : pendingStyle}`}
@@ -43,7 +43,7 @@ export const Task = ({ task, setTaskToDelete }: TaskProps) => {
               </p>
             </div>
             <div>
-              <span className="text-sm mr-4">{format(new Date(task.createdAt), 'dd/MM/yyyy')}</span>
+              <span className="text-sm mr-4">{`${date.getDay()}/${date.getMonth() + 1}/${date.getFullYear()}`}</span>
               <span className="text-sm hover:cursor-pointer" onClick={() => setTaskToDelete(task)}>
                 ✖️
               </span>
