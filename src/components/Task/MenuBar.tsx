@@ -5,12 +5,20 @@ import { useMutation, useQuery } from '@apollo/client';
 import { CreateTaskDocument, GetTasksDocument } from '../../gql/graphql';
 import { ConfirmationModal } from '../Ui/ConfirmationModal';
 import { TaskForm } from './TaskForm';
+import { FilterButton } from '../Ui/FilterButton';
+
+const isClickedInitialValues = {
+  [FilterState.ALL]: false,
+  [FilterState.COMPLETED]: false,
+  [FilterState.PENDING]: false,
+};
 
 export const MenuBar = () => {
   const { refetch } = useQuery(GetTasksDocument);
   const { setFilter } = useContext(TaskContext);
   const [createTask] = useMutation(CreateTaskDocument);
   const [showModal, setShowModal] = useState<boolean>(false);
+  const [isClicked, setIsClicked] = useState(isClickedInitialValues);
 
   const handleCreateTask = async (formData: FormData) => {
     const title = formData.get('title') as string;
@@ -20,18 +28,41 @@ export const MenuBar = () => {
     setShowModal(false);
   };
 
+  const handleFilter = (buttonCliked: FilterState) => {
+    setFilter(buttonCliked);
+    setIsClicked({
+      ...isClickedInitialValues,
+      [buttonCliked]: true,
+    });
+  };
+
   return (
     <div className="border w-full py-4 rounded-lg border-black bg-blue-900 flex justify-evenly mb-4">
       <div className="border flex justify-around">
         <label>search</label>
         <input type="text" />
       </div>
-      <div className="border flex justify-around">
-        <button onClick={() => setFilter(FilterState.ALL)}>Todos</button>
-        <button onClick={() => setFilter(FilterState.COMPLETED)}>Completos</button>
-        <button onClick={() => setFilter(FilterState.PENDING)}>Pendientes</button>
+      <div className=" w-[30%] flex justify-around">
+        <FilterButton
+          isClicked={isClicked[FilterState.ALL]}
+          action={() => handleFilter(FilterState.ALL)}
+        >
+          Todos
+        </FilterButton>
+        <FilterButton
+          isClicked={isClicked[FilterState.COMPLETED]}
+          action={() => handleFilter(FilterState.COMPLETED)}
+        >
+          Completos
+        </FilterButton>
+        <FilterButton
+          isClicked={isClicked[FilterState.PENDING]}
+          action={() => handleFilter(FilterState.PENDING)}
+        >
+          Pendientes
+        </FilterButton>
       </div>
-      <div className="w-auto">
+      <div className="w-[10%]">
         <Button action={() => setShowModal(true)}>Nueva tarea</Button>
       </div>
       <ConfirmationModal
