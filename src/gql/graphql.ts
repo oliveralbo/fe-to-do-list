@@ -124,7 +124,13 @@ export type RemoveTaskMutationVariables = Exact<{
 
 export type RemoveTaskMutation = {
   __typename?: 'Mutation';
-  removeTask: { __typename?: 'Task' } & { ' $fragmentRefs'?: { TaskFragment: TaskFragment } };
+  removeTask: {
+    __typename?: 'Task';
+    title: string;
+    completed: boolean;
+    description: string;
+    createdAt: string;
+  };
 };
 
 export const TaskFragmentDoc = {
@@ -430,24 +436,14 @@ export const RemoveTaskDocument = {
             ],
             selectionSet: {
               kind: 'SelectionSet',
-              selections: [{ kind: 'FragmentSpread', name: { kind: 'Name', value: 'Task' } }],
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'title' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'completed' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'description' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'createdAt' } },
+              ],
             },
           },
-        ],
-      },
-    },
-    {
-      kind: 'FragmentDefinition',
-      name: { kind: 'Name', value: 'Task' },
-      typeCondition: { kind: 'NamedType', name: { kind: 'Name', value: 'Task' } },
-      selectionSet: {
-        kind: 'SelectionSet',
-        selections: [
-          { kind: 'Field', name: { kind: 'Name', value: 'id' } },
-          { kind: 'Field', name: { kind: 'Name', value: 'title' } },
-          { kind: 'Field', name: { kind: 'Name', value: 'completed' } },
-          { kind: 'Field', name: { kind: 'Name', value: 'description' } },
-          { kind: 'Field', name: { kind: 'Name', value: 'createdAt' } },
         ],
       },
     },

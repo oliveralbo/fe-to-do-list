@@ -1,27 +1,18 @@
-import { useMutation, useQuery } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 import { TaskForm } from './TaskForm';
-import {
-  CompleteTaskDocument,
-  EditTaskDocument,
-  GetTasksDocument,
-  RemoveTaskDocument,
-  TaskFragment,
-} from '../gql/graphql';
-import { useState } from 'react';
+import { CompleteTaskDocument, EditTaskDocument, TaskFragment } from '../gql/graphql';
+import { Dispatch, SetStateAction, useState } from 'react';
 import { Button } from './Button';
-import { ConfirmationModal } from './ConfirmationModal';
 
 interface TaskProps {
   task: TaskFragment;
+  setTaskToDelete: Dispatch<SetStateAction<TaskFragment | null>>;
 }
 
-export const Task = ({ task }: TaskProps) => {
-  const { refetch } = useQuery(GetTasksDocument);
-  const [showModal, setShowModal] = useState<boolean>(false);
+export const Task = ({ task, setTaskToDelete }: TaskProps) => {
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const [completeTask] = useMutation(CompleteTaskDocument);
   const [editTask] = useMutation(EditTaskDocument);
-  const [removeTask] = useMutation(RemoveTaskDocument);
 
   const completedStyle = 'border-green-800 bg-green-300';
   const pendingStyle = 'border-blue-800 bg-blue-300';
@@ -37,17 +28,6 @@ export const Task = ({ task }: TaskProps) => {
     completeTask({ variables: { taskId: task.id, status: !task.completed } });
   };
 
-  const handleDelete = async () => {
-    try {
-      await removeTask({ variables: { taskId: task.id } });
-    } catch (e) {
-      console.log(e);
-    }
-
-    setShowModal(false);
-    refetch();
-  };
-
   return (
     <div
       className={`p-4 mb-4 border-3 shadow-xl rounded-2xl ${task.completed ? completedStyle : pendingStyle}`}
@@ -61,7 +41,7 @@ export const Task = ({ task }: TaskProps) => {
                 Estado: {task.completed ? 'Completado ✅' : 'Pendiente ⏰'}
               </p>
             </div>
-            <p className="text-sm hover:cursor-pointer" onClick={() => setShowModal(true)}>
+            <p className="text-sm hover:cursor-pointer" onClick={() => setTaskToDelete(task)}>
               ✖️
             </p>
           </div>
@@ -81,13 +61,6 @@ export const Task = ({ task }: TaskProps) => {
       {isEditing && (
         <TaskForm task={task} onCancel={() => setIsEditing(false)} onSubmit={handleEditSubmit} />
       )}
-
-      <ConfirmationModal
-        isOpen={showModal}
-        onClose={() => setShowModal(false)}
-        onConfirm={handleDelete}
-        message={`¿Está seguro que desea eliminar la tarea "${task.title}"?`}
-      />
     </div>
   );
 };
