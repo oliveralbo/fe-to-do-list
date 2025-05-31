@@ -38,11 +38,11 @@ export const MenuBar = () => {
   };
 
   return (
-    <div className="border w-full py-4 rounded-lg border-black bg-blue-900 flex justify-evenly mb-4">
+    <div className="border w-full py-4 rounded-lg border-black bg-blue-900 flex flex-col items-center justify-evenly mb-4 sm:flex-row">
       <div>
         <SearchInput setSearch={setSearch} />
       </div>
-      <div className="w-[30%] flex justify-around">
+      <div className="flex justify-around my-4 sm:w-[30%] sm:my-0">
         <FilterButton
           isClicked={isClicked[FilterState.ALL]}
           action={() => handleFilter(FilterState.ALL)}
@@ -62,7 +62,7 @@ export const MenuBar = () => {
           Pendientes
         </FilterButton>
       </div>
-      <div className="w-[10%]">
+      <div className="sm:w-[10%]">
         <Button action={() => setShowModal(true)}>Nueva tarea</Button>
       </div>
       <ConfirmationModal
