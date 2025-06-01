@@ -2,6 +2,10 @@
 
 Frontend para la aplicación TodoList desarrollado con React, TypeScript, Vite y Apollo Client.
 
+## Aplicacion deplegada productiva:
+
+- [Ticmas To-Do-List](https://fe-to-do-list-dun.vercel.app/)
+
 ## Repositorios Relacionados
 
 - [Frontend](https://github.com/oliveralbo/fe-to-do-list) - Aplicación frontend de TodoList(este repositorio)
@@ -27,6 +31,17 @@ cd frontend-todolist
 ```bash
 npm install
 ```
+
+3. Crea un archivo `.env` en el directorio raíz con el siguiente contenido:
+
+   ```
+   VITE_BACKEND_URL=http://localhost:3000
+   ```
+
+4. Crea un archivo `.env.production` en el directorio raíz con el siguiente contenido:
+   ```
+   VITE_BACKEND_URL=https://be-to-do-list-production.up.railway.app
+   ```
 
 ## Configuración de GraphQL
 
