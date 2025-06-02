@@ -31,6 +31,7 @@ export const Task = ({ task, setTaskToDelete }: TaskProps) => {
   const date = new Date(task.createdAt);
   return (
     <div
+      data-testid="task-container"
       className={`p-4 mb-4 border-3 shadow-xl rounded-2xl ${task.completed ? completedStyle : pendingStyle}`}
     >
       {!isEditing && (

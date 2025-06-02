@@ -117,6 +117,8 @@ frontend-todolist/
 
 1. Inicia el servidor de desarrollo:
 
+- Verificar backend levantado previamente
+
 ```bash
 npm run dev
 ```
@@ -125,4 +127,6 @@ npm run dev
 
 ## Comentarios
 
-- Se decide migrar los test de jest a vitest debido a conflictos entre versionados de @apollo y @jest
+- Se decide migrar los test de jest a vitest debido a conflictos entre versionados de @apollo, @vite y @jest
+
+- Tanto el Frontend como el Backend están preparados para trabajo en equipo, con Husky configurado en el pre-commit para ejecutar el linter, formatear el código y correr los tests. Además, se definieron reglas y se sugieren extensiones en .vscode para facilitar el desarrollo.

@@ -15,7 +15,7 @@ export const TaskForm = ({ task, onCancel, onSubmit }: TaskFormProps) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="w-full">
+    <form onSubmit={handleSubmit} className="w-full" aria-label="task-form">
       <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-4 gap-2">
         <input
           name="title"
