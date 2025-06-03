@@ -44,7 +44,7 @@ export const Task = ({ task, setTaskToDelete }: TaskProps) => {
               </p>
             </div>
             <div>
-              <span className="text-sm mr-4">{`${date.getDay()}/${date.getMonth() + 1}/${date.getFullYear()}`}</span>
+              <span className="text-sm mr-4">{`${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`}</span>
               <span className="text-sm hover:cursor-pointer" onClick={() => setTaskToDelete(task)}>
                 ✖️
               </span>
