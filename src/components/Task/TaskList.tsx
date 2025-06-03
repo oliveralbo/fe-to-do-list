@@ -35,7 +35,7 @@ export const TaskList = () => {
           ? !task.completed
           : true
     )
-    .filter((task) => task.title.includes(search));
+    .filter((task) => task.title.toLowerCase().includes(search.toLowerCase()));
 
   return (
     <>
